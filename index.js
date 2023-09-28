@@ -2,7 +2,19 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
-const mainMenu = ["Quit"];
+const mainMenu = [
+  "View all departments",
+  "View all roles",
+  "View all employees",
+  new inquirer.Separator(),
+  "Add a department",
+  "Add a role",
+  "Add an employee",
+  new inquirer.Separator(),
+  "Update employee role",
+  new inquirer.Separator(),
+  "Quit",
+];
 
 main();
 
@@ -19,11 +31,13 @@ async function main() {
         name: "action",
         type: "list",
         message: "What would you like to do?",
+        loop: false,
         choices: mainMenu,
       },
     ]);
     switch (response.action) {
       case "Quit":
+      default:
         active = false;
         break;
     }
