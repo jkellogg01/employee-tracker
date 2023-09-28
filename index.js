@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const Connection = require("./db/queries");
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
@@ -19,11 +20,13 @@ const mainMenu = [
 main();
 
 async function main() {
-  const db = await mysql.createConnection({
+  const db = new Connection({
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
   });
+  await db.connect();
+  console.log(db);
   let active = true;
   while (active) {
     const response = await inquirer.prompt([
