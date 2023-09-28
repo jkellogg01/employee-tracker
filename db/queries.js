@@ -1,15 +1,9 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
-class Connection {
-  constructor(connectionInfo) {
-    const { database, user, password } = connectionInfo;
+class Queries {
+  constructor(database) {
     this.database = database;
-    this.user = user;
-    this.password = password;
-  }
-  async connect() {
-    this.db = await mysql.createConnection(this);
   }
   async viewDepartments() {
     console.log("This doesn't do anything yet!");
@@ -34,4 +28,4 @@ class Connection {
   }
 }
 
-module.exports = Connection;
+module.exports = Queries;
