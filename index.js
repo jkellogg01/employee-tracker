@@ -26,7 +26,7 @@ async function main() {
     password: process.env.DB_PASS,
   });
   await db.connect();
-  console.log(db);
+  // console.log(db);
   let active = true;
   while (active) {
     const response = await inquirer.prompt([
@@ -39,6 +39,27 @@ async function main() {
       },
     ]);
     switch (response.action) {
+      case "View all departments":
+        db.viewDepartments();
+        break;
+      case "View all roles":
+        db.viewRoles();
+        break;
+      case "View all employees":
+        db.viewEmployees();
+        break;
+      case "Add a department":
+        db.addDepartment();
+        break;
+      case "Add a role":
+        db.addRole();
+        break;
+      case "Add an employee":
+        db.addEmployee();
+        break;
+      case "Update employee role":
+        db.updateEmployeeRole();
+        break;
       case "Quit":
       default:
         active = false;
