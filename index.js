@@ -1,7 +1,10 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2/promise");
+require("dotenv").config();
 
 const mainMenu = ["Quit"];
+
+main();
 
 async function main() {
   const db = await mysql.createConnection({
