@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
-const connect = require("./config/connections.js");
-const Queries = require("./db/queries");
+// const connect = require("./config/connection.js");
+const mysql = require("mysql2/promise");
+// const Queries = require("./db/queries");
 require("dotenv").config();
 
 const mainMenu = [
@@ -20,7 +21,11 @@ const mainMenu = [
 main();
 
 async function main() {
-  const db = new Queries(await connect());
+  const db = await mysql.createConnection({
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+  });
   let active = true;
   while (active) {
     const response = await inquirer.prompt([
@@ -61,4 +66,27 @@ async function main() {
     }
   }
   process.exit();
+}
+
+async function viewDepartments() {
+  const departments = await this.database.query(`SELECT * FROM departments`);
+  console.table(departments);
+}
+async function viewRoles() {
+  console.log("This doesn't do anything yet!");
+}
+async function viewEmployees() {
+  console.log("This doesn't do anything yet!");
+}
+async function addDepartment() {
+  console.log("This doesn't do anything yet!");
+}
+async function addRole() {
+  console.log("This doesn't do anything yet!");
+}
+async function addEmployee() {
+  console.log("This doesn't do anything yet!");
+}
+async function updateEmployeeRole() {
+  console.log("This doesn't do anything yet!");
 }
