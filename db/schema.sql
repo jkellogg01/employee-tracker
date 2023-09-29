@@ -3,12 +3,12 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
-CREATE TABLE department (
+CREATE TABLE departments (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(30)
 );
 
-CREATE TABLE role (
+CREATE TABLE roles (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(30),
   salary DECIMAL,
@@ -16,7 +16,7 @@ CREATE TABLE role (
   FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
-CREATE TABLE employee (
+CREATE TABLE employees (
   id INT PRIMARY KEY AUTO_INCREMENT,
   first_name VARCHAR(30), 
   last_name VARCHAR(30),

@@ -39,25 +39,25 @@ async function main() {
     ]);
     switch (response.action) {
       case "View all departments":
-        db.viewDepartments();
+        viewDepartments(db);
         break;
       case "View all roles":
-        db.viewRoles();
+        viewRoles(db);
         break;
       case "View all employees":
-        db.viewEmployees();
+        viewEmployees(db);
         break;
       case "Add a department":
-        db.addDepartment();
+        addDepartment(db);
         break;
       case "Add a role":
-        db.addRole();
+        addRole(db);
         break;
       case "Add an employee":
-        db.addEmployee();
+        addEmployee(db);
         break;
       case "Update employee role":
-        db.updateEmployeeRole();
+        updateEmployeeRole(db);
         break;
       case "Quit":
       default:
@@ -68,25 +68,25 @@ async function main() {
   process.exit();
 }
 
-async function viewDepartments() {
-  const departments = await this.database.query(`SELECT * FROM departments`);
+async function viewDepartments(db) {
+  const departments = await db.query(`SELECT * FROM departments`);
   console.table(departments);
 }
-async function viewRoles() {
+async function viewRoles(db) {
   console.log("This doesn't do anything yet!");
 }
-async function viewEmployees() {
+async function viewEmployees(db) {
   console.log("This doesn't do anything yet!");
 }
-async function addDepartment() {
+async function addDepartment(db) {
   console.log("This doesn't do anything yet!");
 }
-async function addRole() {
+async function addRole(db) {
   console.log("This doesn't do anything yet!");
 }
-async function addEmployee() {
+async function addEmployee(db) {
   console.log("This doesn't do anything yet!");
 }
-async function updateEmployeeRole() {
+async function updateEmployeeRole(db) {
   console.log("This doesn't do anything yet!");
 }
