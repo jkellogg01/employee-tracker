@@ -1,4 +1,3 @@
-const mysql = require("mysql2/promise");
 require("dotenv").config();
 
 class Queries {
@@ -6,7 +5,8 @@ class Queries {
     this.database = database;
   }
   async viewDepartments() {
-    console.log("This doesn't do anything yet!");
+    const departments = await this.database.query(`SELECT * FROM departments`);
+    console.table(departments);
   }
   async viewRoles() {
     console.log("This doesn't do anything yet!");
