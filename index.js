@@ -90,11 +90,29 @@ async function addDepartment(db) {
     type: "input",
     message: "Enter the name of the new department:",
   }]);
-  await db.query(`INSERT INTO departments (name) VALUE (?)`, data.deptName);
+  await db.query('INSERT INTO departments (name) VALUE (?)', data.deptName);
   console.log("Successfully created department!");
 }
 async function addRole(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await inquirer.prompt([
+    {
+      name: "title",
+      type: "input",
+    },
+    {
+      name: "salary",
+      type: "input",
+    },
+    {
+      name: "deptId",
+      type: "input",
+    },
+  ]);
+  await db.query(
+    'INSERT INTO roles (title, salary, department_id) VALUE (?, ?, ?)',
+    [ data.title, Number(data.salary), Number(data.deptId) ]
+  );
+  console.log("Successfully created role!");
 }
 async function addEmployee(db) {
   console.log("This doesn't do anything yet!");
