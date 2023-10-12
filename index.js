@@ -62,7 +62,6 @@ async function main() {
       default:
         process.exit(0);
     }
-    console.log("<----->");
     const promptContinue = await inquirer.prompt([
       {
         name: "continue",
@@ -76,14 +75,16 @@ async function main() {
 }
 
 async function viewDepartments(db) {
-  const departments = await db.query(`SELECT * FROM departments`);
-  console.table(departments);
+  const data = await db.query(`SELECT * FROM departments`);
+  console.table(data[0]);
 }
 async function viewRoles(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await db.query(`SELECT * FROM roles`);
+  console.table(data[0]);
 }
 async function viewEmployees(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await db.query(`SELECT * FROM employees`);
+  console.table(data[0]);
 }
 async function addDepartment(db) {
   console.log("This doesn't do anything yet!");
