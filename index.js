@@ -26,94 +26,58 @@ async function main() {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
   });
-  let active = true;
-  mainPrompt(db);
-  // while (active) {
-  //   const response = await inquirer.prompt([
-  //     {
-  //       name: "action",
-  //       type: "list",
-  //       message: "What would you like to do?",
-  //       loop: false,
-  //       choices: mainMenu,
-  //     },
-  //   ]);
-  //   switch (response.action) {
-  //     case "View all departments":
-  //       viewDepartments(db);
-  //       break;
-  //     case "View all roles":
-  //       viewRoles(db);
-  //       break;
-  //     case "View all employees":
-  //       viewEmployees(db);
-  //       break;
-  //     case "Add a department":
-  //       addDepartment(db);
-  //       break;
-  //     case "Add a role":
-  //       addRole(db);
-  //       break;
-  //     case "Add an employee":
-  //       addEmployee(db);
-  //       break;
-  //     case "Update employee role":
-  //       updateEmployeeRole(db);
-  //       break;
-  //     case "Quit":
-  //     default:
-  //       active = false;
-  //       break;
-  //   }
-  // }
-  // process.exit();
-}
-
-async function mainPrompt(db) {
-  const response = await inquirer.prompt([
-    {
-      name: "action",
-      type: "list",
-      message: "What would you like to do?",
-      loop: false,
-      choices: mainMenu,
-    },
-  ]);
-  switch (response.action) {
-    case "View all departments":
-      viewDepartments(db);
-      break;
-    case "View all roles":
-      viewRoles(db);
-      break;
-    case "View all employees":
-      viewEmployees(db);
-      break;
-    case "Add a department":
-      addDepartment(db);
-      break;
-    case "Add a role":
-      addRole(db);
-      break;
-    case "Add an employee":
-      addEmployee(db);
-      break;
-    case "Update employee role":
-      updateEmployeeRole(db);
-      break;
-    case "Quit":
-    default:
-      active = false;
-      break;
+  while (true) {
+    const response = await inquirer.prompt([
+      {
+        name: "action",
+        type: "list",
+        message: "What would you like to do?",
+        loop: false,
+        choices: mainMenu,
+      },
+    ]);
+    switch (response.action) {
+      case "View all departments":
+        await viewDepartments(db);
+        break;
+      case "View all roles":
+        await viewRoles(db);
+        break;
+      case "View all employees":
+        await viewEmployees(db);
+        break;
+      case "Add a department":
+        await addDepartment(db);
+        break;
+      case "Add a role":
+        await addRole(db);
+        break;
+      case "Add an employee":
+        await addEmployee(db);
+        break;
+      case "Update employee role":
+        await updateEmployeeRole(db);
+        break;
+      case "Quit":
+      default:
+        process.exit(0);
+    }
+    console.log("<----->");
+    const promptContinue = await inquirer.prompt([
+      {
+        name: "continue",
+        type: "confirm",
+        message: "continue?",
+        default: true,
+      },
+    ]);
+    if (!promptContinue.continue) process.exit(0);
   }
-  process.exit();
 }
 
 async function viewDepartments(db) {
   const departments = await db.query(`SELECT * FROM departments`);
-  console.log("<- I'm with stupid");
   console.table(departments);
-  mainPrompt(db);
 }
 async function viewRoles(db) {
   console.log("This doesn't do anything yet!");
