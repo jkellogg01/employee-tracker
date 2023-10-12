@@ -1,7 +1,5 @@
 const inquirer = require("inquirer");
-// const connect = require("./config/connection.js");
 const mysql = require("mysql2/promise");
-// const Queries = require("./db/queries");
 require("dotenv").config();
 
 const mainMenu = [
@@ -87,7 +85,13 @@ async function viewEmployees(db) {
   console.table(data[0]);
 }
 async function addDepartment(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await inquirer.prompt([{
+    name: "deptName",
+    type: "input",
+    message: "Enter the name of the new department:",
+  }]);
+  await db.query(`INSERT INTO departments (name) VALUE (?)`, data.deptName);
+  console.log("Successfully created department!");
 }
 async function addRole(db) {
   console.log("This doesn't do anything yet!");
