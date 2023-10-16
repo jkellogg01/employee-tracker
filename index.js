@@ -115,8 +115,44 @@ async function addRole(db) {
   console.log("Successfully created role!");
 }
 async function addEmployee(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await inquirer.prompt([
+    {
+      name: "firstName",
+      type: "input",
+    },
+    {
+      name: "lastName",
+      type: "input",
+    },
+    {
+      name: "roleId",
+      type: "input",
+    },
+    {
+      name: "managerId",
+      type: "input",
+    },
+  ]);
+  await db.query(
+    'INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)',
+    [ data.firstName, data.lastName, data.roleId, data.managerId ]
+  );
+  console.log("Successfully added employee!");
 }
 async function updateEmployeeRole(db) {
-  console.log("This doesn't do anything yet!");
+  const data = await inquirer.prompt([
+    {
+      name: "employeeId",
+      type: "input",
+    },
+    {
+      name: "newRoleId",
+      type: "input",
+    },
+  ]);
+  await db.query(
+    'UPDATE employees SET role_id = ? WHERE id = ?',
+    [ data.newRoleId, data.employeeId ]
+  );
+  console.log("Successfully updated employee role!");
 }
