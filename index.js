@@ -136,10 +136,19 @@ async function addEmployee(db) {
       default: null,
     },
   ]);
-  await db.query(
-    "INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)",
-    [data.firstName, data.lastName, data.roleId, data.managerId]
-  );
+  console.log(data);
+  if (data.managerId) {
+    await db.query(
+      "INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)",
+      [data.firstName, data.lastName, data.roleId, data.managerId]
+    );
+  } else {
+    await db.query(
+      "INSERT INTO employees (first_name, last_name, role_id) VALUE (?, ?, ?)",
+      [data.firstName, data.lastName, data.roleId]
+    );
+  }
+
   console.log("Successfully added employee!");
 }
 async function updateEmployeeRole(db) {
