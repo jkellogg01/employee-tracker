@@ -85,12 +85,14 @@ async function viewEmployees(db) {
   console.table(data[0]);
 }
 async function addDepartment(db) {
-  const data = await inquirer.prompt([{
-    name: "deptName",
-    type: "input",
-    message: "Enter the name of the new department:",
-  }]);
-  await db.query('INSERT INTO departments (name) VALUE (?)', data.deptName);
+  const data = await inquirer.prompt([
+    {
+      name: "deptName",
+      type: "input",
+      message: "Enter the name of the new department:",
+    },
+  ]);
+  await db.query("INSERT INTO departments (name) VALUE (?)", data.deptName);
   console.log("Successfully created department!");
 }
 async function addRole(db) {
@@ -109,8 +111,8 @@ async function addRole(db) {
     },
   ]);
   await db.query(
-    'INSERT INTO roles (title, salary, department_id) VALUE (?, ?, ?)',
-    [ data.title, Number(data.salary), Number(data.deptId) ]
+    "INSERT INTO roles (title, salary, department_id) VALUE (?, ?, ?)",
+    [data.title, Number(data.salary), Number(data.deptId)]
   );
   console.log("Successfully created role!");
 }
@@ -131,11 +133,12 @@ async function addEmployee(db) {
     {
       name: "managerId",
       type: "input",
+      default: null,
     },
   ]);
   await db.query(
-    'INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)',
-    [ data.firstName, data.lastName, data.roleId, data.managerId ]
+    "INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUE (?, ?, ?, ?)",
+    [data.firstName, data.lastName, data.roleId, data.managerId]
   );
   console.log("Successfully added employee!");
 }
@@ -150,9 +153,9 @@ async function updateEmployeeRole(db) {
       type: "input",
     },
   ]);
-  await db.query(
-    'UPDATE employees SET role_id = ? WHERE id = ?',
-    [ data.newRoleId, data.employeeId ]
-  );
+  await db.query("UPDATE employees SET role_id = ? WHERE id = ?", [
+    data.newRoleId,
+    data.employeeId,
+  ]);
   console.log("Successfully updated employee role!");
 }
